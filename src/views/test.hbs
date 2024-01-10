@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>App</title>
+  </head>
+  <body>
+    <a  onclick= openPopup("http://localhost:3000/auth/google")>
+    <button>BUTTON</button>
+    </a>
+
+    <script>
+        function openPopup(url,urlRedirect) {
+      const screenWidth = window.screen.width;
+      const screenHeight = window.screen.height;
+      // Customize the popup window features as needed
+      const width = 600;
+      const height = 700;
+      const left = screenWidth / 2 - width / 2;
+      const top = screenHeight / 2 - height / 2;
+      
+      //open popup
+    
+    {{!-- if(popup.name === 'true'){
+      const checkPopuWindow = setInterval(() =>{
+        if(popup.closed) {
+        clearInterval(checkPopuWindow);
+       
+      popup.name = 'false';
+       if(popup.name === 'false')
+       console.log('da vao day')
+        window.location.href = `${urlRedirect}/login`
+        }
+      }, 100)
+    }  --}}
+
+
+ const rootUrl = "https://accounts.google.com/o/oauth2/v2/auth";
+
+  const options = {
+    redirect_uri:'http://localhost:3000/auth/google/callback',
+    client_id: '490727912631-0a5k0bd303pukkf664dd79aruadpotq5.apps.googleusercontent.com',
+    access_type: "offline",
+    response_type: "code",
+    prompt: "consent",
+    scope: [
+      "https://www.googleapis.com/auth/userinfo.profile",
+      "https://www.googleapis.com/auth/userinfo.email",
+    ].join(" "),
+  };
+
+
+console.log ({options})
+    const qs = new URLSearchParams(options)
+console.log(qs.toString())
+    let popup = window.open(`${rootUrl}?${qs.toString()}`, 'true', `width=${width},height=${height},left=${left},top=${top}`);
+
+    }
+    </script>
+  </body>
+</html>
